@@ -2,15 +2,18 @@ k8gb:
   dnsZones:
     - parentZone: "nig.gl"
       loadBalancedZone: "k8gb.nig.gl"
+      dnsZoneNegTTL: 60
   clusterGeoTag: "cluster2" # -- geo tag for this cluster
   extGslbClustersGeoTags: "cluster1,cluster3"
   edgeDNSServers:
     - "1.1.1.1"
+  nsRecordTTL: 60
 coredns:
   serviceType: LoadBalancer
   service:
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-0771640b27b80fd42
 extdns:
   enabled: true
   txtPrefix: "k8gb-cluster2-"

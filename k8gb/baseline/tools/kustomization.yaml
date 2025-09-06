@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
   - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.2/deploy/static/provider/cloud/deploy.yaml
+patches:
+  - path: ./nginx-patch.yaml
