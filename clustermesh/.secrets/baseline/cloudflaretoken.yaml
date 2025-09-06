@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: external-dns
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare
+  namespace: external-dns
+type: Opaque
+stringData:
+  token: '1MZvDbpIM4NQguesZdkFq1Q-DH2_FV5ctxWhbkfS'
