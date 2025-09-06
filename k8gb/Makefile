@@ -34,16 +34,16 @@ setup-echo:
 
 k8gb-setup:
 	@echo "Setting up k8gb..."
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG1) CURRENT_VALUES=values/k8gb.yaml
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG2) CURRENT_VALUES=values/k8gb.yaml
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG3) CURRENT_VALUES=values/k8gb.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG1) CURRENT_VALUES=values/cluster1.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG2) CURRENT_VALUES=values/cluster2.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG3) CURRENT_VALUES=values/cluster3.yaml
 	@echo "k8gb setup complete."
 
 k8gb-setup-single:
 	helm repo add k8gb https://www.k8gb.io
 	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl create namespace k8gb --dry-run=client -o yaml | KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f -
 	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f .secrets/cloudflaretoken.yaml
-	KUBECONFIG=$(CURRENT_KUBECONFIG) helm upgrade --install k8gb k8gb/k8gb --namespace k8gb --version 0.14.0 -f $(CURRENT_VALUES)
+	KUBECONFIG=$(CURRENT_KUBECONFIG) helm upgrade --install k8gb k8gb/k8gb --namespace k8gb --version 0.15.0 -f $(CURRENT_VALUES)
 
 k8gb-roundrobin:
 	@echo "Deploying k8gb roundrobin demo..."
@@ -125,8 +125,8 @@ watch-nodes:
 	@watch kubectl --kubeconfig=$(CURRENT_KUBECONFIG) get nodes
 
 kill-workers:
-	KUBECONFIG=$(KUBECONFIG$(CLUSTERID)) kubectl scale machinedeployment -n kube-system thirsty-tesla --replicas=0
-	KUBECONFIG=$(KUBECONFIG$(CLUSTERID)) kubectl delete node -l beta.kubernetes.io/instance-type=t3.small --force --grace-period=0
+	KUBECONFIG=$(KUBECONFIG$(CLUSTERID)) kubectl scale machinedeployment -n kube-system affectionate-albattani --replicas=0
+	KUBECONFIG=$(KUBECONFIG$(CLUSTERID)) kubectl delete node -l beta.kubernetes.io/instance-type=t3.medium --force --grace-period=0
 
 #endregion Kubernetes
 #endregion Helpers
