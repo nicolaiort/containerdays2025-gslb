@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 MAKEFLAGS := --no-print-directory
-KUBECONFIG1 := .secrets/cluster1-kubeconfig
-KUBECONFIG2 := .secrets/cluster2-kubeconfig
-KUBECONFIG3 := .secrets/cluster3-kubeconfig
+KUBECONFIG1 := .secrets/cluster1
+KUBECONFIG2 := .secrets/cluster2
+KUBECONFIG3 := .secrets/cluster3
 
 DOMAIN := "demo.k8gb.nig.gl"
 
@@ -34,9 +34,9 @@ setup-echo:
 
 k8gb-setup:
 	@echo "Setting up k8gb..."
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG1) CURRENT_VALUES=values/cluster1.yaml
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG2) CURRENT_VALUES=values/cluster2.yaml
-	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG3) CURRENT_VALUES=values/cluster3.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG1) CURRENT_VALUES=values/k8gb.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG2) CURRENT_VALUES=values/k8gb.yaml
+	make k8gb-setup-single CURRENT_KUBECONFIG=$(KUBECONFIG3) CURRENT_VALUES=values/k8gb.yaml
 	@echo "k8gb setup complete."
 
 k8gb-setup-single:
