@@ -1,6 +1,8 @@
-# rejekts2025-gslb
+# containerdays2025-gslb
 
-Demo for the talk "Evaluating Global Load Balancing Options for Kubernetes in Practice" presented at [Cloud Native Rejekts 2025](https://cfp.cloud-native.rejekts.io/cloud-native-rejekts-europe-london-2025/talk/UFZNVH/) in London by [Nicolai Ort](https://github.com/nicolaiort) and [Tobias Schneck](https://github.com/toschneck).
+Demo for the talk "Evaluating Global Load Balancing Options for Kubernetes in Practice" presented at [ContainerDays 2025](https://www.containerdays.io/containerdays-conference-2025) in Hamburg by [Nicolai Ort](https://github.com/nicolaiort) and [Tobias Schneck](https://github.com/toschneck).
+
+Slides are shared on Google Docs: <https://docs.google.com/presentation/d/10l3WNjHVwei7WuuTQrpcSLnK3m5OZ0XGGzghR7P0GDM/edit?usp=sharing>
 
 ## Overview
 
@@ -33,15 +35,15 @@ You can just override the secrets with your own values.
 1. Clone this repository:
 
    ```bash
-   git clone git@github.com:nicolaiort/rejekts2025-glsb.git #via SSH
+   git clone git@github.com:nicolaiort/containderdays2025-gslb.git #via SSH
    # or
-   git clone https://github.com/nicolaiort/rejekts2025-glsb.git #via HTTPS
+   git clone https://github.com/nicolaiort/containderdays2025-gslb.git #via HTTPS
    ```
 
 2. Change into the directory:
 
    ```bash
-   cd rejekts2025-glsb
+   cd containderdays2025-gslb
    ```
 
 ### K8GB Demo
