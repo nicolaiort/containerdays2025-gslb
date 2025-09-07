@@ -13,6 +13,28 @@ coredns:
   service:
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  extraVolumes:
+    - name: dnssec
+      secret:
+        secretName: dnssec
+        items:
+          - key: dnssec.key
+            path: dnssec.key
+          - key: dnssec.private
+            path: dnssec.private
+  extraVolumeMounts:
+    - name: dnssec
+      mountPath: /dnssec
+      readOnly: true
+  servers:
+    - zones:
+        - zone: .
+          use_tcp: true
+      port: 5353
+      servicePort: 53
+      plugins:
+        - name: prometheus
+          parameters: 0.0.0.0:9153
 extdns:
   enabled: true
   txtPrefix: "k8gb-cluster1-"

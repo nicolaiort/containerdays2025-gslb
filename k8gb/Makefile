@@ -43,7 +43,10 @@ k8gb-setup-single:
 	helm repo add k8gb https://www.k8gb.io
 	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl create namespace k8gb --dry-run=client -o yaml | KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f -
 	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f .secrets/cloudflaretoken.yaml
+	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f .secrets/dnssec.yaml
 	KUBECONFIG=$(CURRENT_KUBECONFIG) helm upgrade --install k8gb k8gb/k8gb --namespace k8gb --version 0.15.0 -f $(CURRENT_VALUES)
+	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl apply -f values/cm.yaml
+	KUBECONFIG=$(CURRENT_KUBECONFIG) kubectl rollout restart deployment -n k8gb k8gb-coredns
 
 k8gb-roundrobin:
 	@echo "Deploying k8gb roundrobin demo..."
@@ -92,6 +95,9 @@ dig-first:
 
 dig-chart:
 	@for i in {1..$(TIMES)}; do make dig-first DOMAIN=$(DOMAIN); done | sort | uniq -c | sort -nr
+
+delv:
+	@delv $(DOMAIN) @1.1.1.1
 
 curl-resolved:
 	@curl -s -k -H "Host: $(DOMAIN)" -H "Connection: close" http://$(shell dig $(DOMAIN) +short @3.68.142.89 | head -1 ) && echo

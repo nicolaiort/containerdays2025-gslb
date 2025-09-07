@@ -13,6 +13,17 @@ coredns:
   service:
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  extraVolumes:
+    - name: dnssec
+      secret:
+        secretName: dnssec
+        items:
+          - key: dnssec.key
+            path: dnssec.key
+  extraVolumeMounts:
+    - name: dnssec
+      mountPath: /dnssec
+      readOnly: true
 extdns:
   enabled: true
   txtPrefix: "k8gb-cluster3-"
