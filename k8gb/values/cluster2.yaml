@@ -20,6 +20,8 @@ coredns:
         items:
           - key: dnssec.key
             path: dnssec.key
+          - key: dnssec.private
+            path: dnssec.private
   extraVolumeMounts:
     - name: dnssec
       mountPath: /dnssec
