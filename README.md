@@ -1,8 +1,16 @@
 # containerdays2025-gslb
 
 Demo for the talk "Evaluating Global Load Balancing Options for Kubernetes in Practice" presented at [ContainerDays 2025](https://www.containerdays.io/containerdays-conference-2025) in Hamburg by [Nicolai Ort](https://github.com/nicolaiort) and [Tobias Schneck](https://github.com/toschneck).
-
 Slides are shared on Google Docs: <https://docs.google.com/presentation/d/10l3WNjHVwei7WuuTQrpcSLnK3m5OZ0XGGzghR7P0GDM/edit?usp=sharing>
+
+This is an updated version of the talk we presented at [Cloud Native Rejekts 2025](https://cfp.cloud-native.rejekts.io/cloud-native-rejekts-europe-london-2025/talk/UFZNVH/) in London.
+You can find the repo for that talk here: <https://github.com/nicolaiort/rejekts2025-gslb>
+
+## What's new?
+
+- Updated to k8gb v0.15.0
+- Updated cert-manager to v1.18.2
+- Added DNSSEC support for k8gb demo -> Pretty cool, right? :)
 
 ## Overview
 
@@ -11,6 +19,7 @@ This repository contains two main demos:
 1. **k8gb**: A demo of the [k8gb](https://k8gb.io/) global load balancer
   - Round Robin based load balancing across multiple clusters
   - Failover based load balancing across multiple clusters with one primary cluster and multiple secondary clusters
+  - DNSSEC support
 2. **clustermesh**: A demo of clustermesh based load balancing implemented with [cilium](https://cilium.io/)
 
 We also included the drawings we used in the talk to explain the concepts of global load balancing in the `images` directory. The `.excalidraw.svg` files are editable with [Excalidraw](https://excalidraw.com/).
@@ -55,7 +64,7 @@ You can just override the secrets with your own values.
    ```
 
 2. Get your kubeconfigs for the clusters you want to use and place them in the `.secrets` directory.
-   The files should be named `cluster1-kubeconfig`, `cluster2-kubeconfig`, etc.
+   The files should be named `cluster1`, `cluster2`, etc.
 
 3. Create secrets, create namespaces and install nginx with cert-manager into your clusters:
 
